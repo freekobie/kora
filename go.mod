@@ -1,3 +1,3 @@
-module github.com/freekobie/margot
+module github.com/freekobie/kora
 
 go 1.24.3
