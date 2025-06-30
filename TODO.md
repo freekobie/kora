@@ -7,21 +7,14 @@ A feature roadmap for building a cloud-based file storage system using a Golang 
 ## PHASE 1: Project Setup
 
 ### Base Environment
-- [ ] Initialize Go module for backend (go mod init)
-- [ ] Scaffold React app using Vite
-- [ ] Setup shared .env config for dev
-- [ ] Configure Docker / Docker Compose (Go + React + DB)
-- [ ] Set up GitHub Actions for CI/CD pipelines
+- [X] Initialize Go module for backend (go mod init)
+- [X] Scaffold React app using Vite
+- [X] Setup shared .env config for dev
+- [X] Configure Docker / Docker Compose (Go + React + DB)
 
 ---
 
 ## PHASE 2: Backend (Golang)
-
-### Infrastructure & Stack
-- [ ] Web framework (Gin)
-- [ ] PostgreSQL
-- [ ] Google Cloud Storage (GCS) for file storage
-- [ ] Authentication via JWT or session tokens
 
 ### Core Features
 

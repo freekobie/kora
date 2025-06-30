@@ -1,0 +1,32 @@
+name: "kora-app"
+
+services:
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    env_file:
+      - ".env"
+    depends_on:
+      - database
+
+  frontend:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+
+  database:
+    image: "postgres:alpine"
+    ports:
+      - "5432:5432"
+    env_file:
+      - ".env"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
