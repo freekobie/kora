@@ -1,0 +1,29 @@
+version: "3"
+
+dotenv: [".env"]
+env:
+  TEST_DB_URL: postgres://userone:pa88word@localhost:5432/kora_test?sslmode=disable
+tasks:
+  run:
+    cmd: go run .
+
+  up:
+    cmd: goose -dir ./migrations postgres $DB_URL up
+
+  down:
+    cmd: goose -dir ./migrations postgres $DB_URL down
+
+  reset:
+    cmd: goose -dir ./migrations postgres $DB_URL reset
+
+  test-up:
+    cmd: goose -dir ./migrations postgres $TEST_DB_URL up
+
+  test-down:
+    cmd: goose -dir ./migrations postgres $TEST_DB_URL down
+
+  test-reset: 
+    cmd: goose -dir ./migrations postgres $TEST_DB_URL reset
+
+  gen-docs:
+    cmd: swag init -g ./cmd/api/main.go -o docs
