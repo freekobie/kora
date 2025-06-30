@@ -27,7 +27,6 @@ A feature roadmap for building a cloud-based file storage system using a Golang 
 
 #### Users & Authentication
 - [ ] User registration and login
-- [ ] OAuth login (Google, GitHub) via OAuth2
 - [ ] Password reset email flow
 
 #### File Upload & Storage
