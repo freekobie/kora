@@ -5,7 +5,7 @@ env:
   TEST_DB_URL: postgres://userone:pa88word@localhost:5432/kora_test?sslmode=disable
 tasks:
   run:
-    cmd: go run .
+    cmd: go run ./cmd/api
 
   up:
     cmd: goose -dir ./migrations postgres $DB_URL up
@@ -22,7 +22,7 @@ tasks:
   test-down:
     cmd: goose -dir ./migrations postgres $TEST_DB_URL down
 
-  test-reset: 
+  test-reset:
     cmd: goose -dir ./migrations postgres $TEST_DB_URL reset
 
   gen-docs:

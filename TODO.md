@@ -20,7 +20,7 @@ A feature roadmap for building a cloud-based file storage system using a Golang 
 
 #### Users & Authentication
 - [X] User registration and login
-- [ ] Password reset email flow
+- [ ] Email change request flow
 
 #### File Upload & Storage
 - [ ] Chunked file upload (multi-part)

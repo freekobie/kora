@@ -1,0 +1,52 @@
+{{define "subject"}} Your Kora Verification Code {{end}}
+
+{{define "text"}}
+Hi {{.Address.Name}},
+
+Thank you for signing up for **Kora**!
+
+Your 6-digit verification code is:
+
+**{{.Code}}**
+
+This code will expire in **15 minutes**.
+
+If you didn’t request this, please ignore this message.
+
+— The Kora Team
+{{end}}
+
+{{define "html"}}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Your Kora Verification Code</title>
+  </head>
+
+  <body
+    style="
+      font-family: sans-serif;
+      color: #000000;
+      background-color: #ffffff;
+      padding: 20px;
+    "
+  >
+    <p>Hi {{.Address.Name}},</p>
+
+    <p>Thank you for signing up for <strong>Kora</strong>!</p>
+
+    <p>Your 6-digit verification code is:</p>
+
+    <p style="font-size: 24px; font-weight: bold; margin: 20px 0">
+      <strong>{{.Code}}</strong>
+    </p>
+
+    <p>This code will expire in <strong>15 minutes</strong>.</p>
+
+    <p>If you didn’t request this, you can safely ignore this message.</p>
+
+    <p>— The Kora Team</p>
+  </body>
+</html>
+{{end}}

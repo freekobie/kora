@@ -1,0 +1,58 @@
+{{define "subject"}} Confirm Your Email Change for Kora {{end}}
+
+{{define "text"}}
+Hi {{.Address.Name}},
+
+We received a request to change the email address associated with your **Kora** account.
+
+To confirm this change, please use the 6-digit verification code below:
+
+**{{.Code}}**
+
+This code will expire in **15 minutes**.
+
+If you didn’t request this, please ignore this message. Your account email will remain unchanged.
+
+— The Kora Team
+{{end}}
+
+{{define "html"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Confirm Your Email Change</title>
+</head>
+
+<body style="
+      font-family: sans-serif;
+      color: #000000;
+      background-color: #ffffff;
+      padding: 20px;
+    ">
+  <p>Hi {{.Address.Name}},</p>
+
+  <p>
+    We received a request to change the email address linked to your
+    <strong>Kora</strong> account.
+  </p>
+
+  <p>To confirm this change, please enter the following verification code:</p>
+
+  <p style="font-size: 24px; font-weight: bold; margin: 20px 0">
+    <strong>{{.Code}}</strong>
+  </p>
+
+  <p>This code will expire in <strong>15 minutes</strong>.</p>
+
+  <p>
+    If you didn’t make this request, you can safely ignore this message. Your
+    account email will remain the same.
+  </p>
+
+  <p>— The Kora Team</p>
+</body>
+
+</html>
+{{end}}

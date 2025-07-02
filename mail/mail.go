@@ -17,7 +17,7 @@ import (
 var mailFS embed.FS
 
 type Mailer struct {
-	cfg *Config
+	config *Config
 }
 
 type Config struct {
@@ -41,20 +41,17 @@ type Message struct {
 	HTML    string    `json:"html"`
 }
 
-type Data struct {
-	Address Address
-	Code    any
-}
+type Data map[string]any
 
 func NewMailer(config *Config) *Mailer {
 	mailer := &Mailer{
-		cfg: config,
+		config: config,
 	}
 	return mailer
 }
 
 func (m *Mailer) generateMessage(recipient []Address, templateFile string, data any) (*Message, error) {
-	tmpl, err := template.ParseFS(mailFS, fmt.Sprintf("template/%s", templateFile))
+	tmpl, err := template.ParseFS(mailFS, fmt.Sprintf("templates/%s", templateFile))
 	if err != nil {
 		slog.Error("error parsing FS", "error", err)
 		return nil, err
@@ -82,7 +79,7 @@ func (m *Mailer) generateMessage(recipient []Address, templateFile string, data 
 	}
 
 	msg := Message{
-		From:    Address{Email: m.cfg.SenderEmail, Name: m.cfg.SenderName},
+		From:    Address{Email: m.config.SenderEmail, Name: m.config.SenderName},
 		To:      recipient,
 		Subject: subject.String(),
 		Text:    plainBody.String(),
@@ -104,15 +101,15 @@ func (m *Mailer) Send(recipients []Address, templateFile string, data any) error
 		return err
 	}
 
-	req, err := http.NewRequest("POST", m.cfg.Host, bytes.NewBuffer(msgJson))
+	req, err := http.NewRequest("POST", m.config.Host, bytes.NewBuffer(msgJson))
 	if err != nil {
 		slog.Error("error creating request", "error", err)
 		return err
 	}
-	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", m.cfg.Token))
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", m.config.Token))
 	req.Header.Add("Content-Type", "application/json")
 
-	client := &http.Client{Timeout: m.cfg.Timeout}
+	client := &http.Client{Timeout: m.config.Timeout}
 	res, err := client.Do(req)
 	if err != nil {
 		slog.Error("error sending request", "error", err)

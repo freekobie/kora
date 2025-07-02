@@ -1,0 +1,56 @@
+{{define "subject"}} Welcome to Kora {{end}}
+
+{{define "text"}}
+Hi {{.Address.Name}},
+
+Welcome to **Kora**! Your email has been successfully verified, and your account is ready to go.
+
+Kora makes it simple to store, share, and access your files securely from anywhere.
+
+Need help? Visit our Help Center or just reply to this email.
+
+**Thanks for joining us, and happy sharing!**
+
+— The Kora Team
+{{end}}
+
+{{define "html"}}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Welcome to Kora</title>
+  </head>
+
+  <body
+    style="
+      font-family: sans-serif;
+      color: #000000;
+      background-color: #ffffff;
+      padding: 20px;
+    "
+  >
+    <p>Hi {{.Address.Name}},</p>
+
+    <p>
+      Welcome to <strong>Kora</strong>! Your email has been successfully
+      verified, and your account is ready to go.
+    </p>
+
+    <p>
+      <strong>Kora</strong> makes it simple to store, share, and access your
+      files securely from anywhere.
+    </p>
+
+    <p>
+      If you need help, you can visit our
+      <a href="https://support.kora.com">Help Center</a> or just reply to this
+      email.
+    </p>
+
+    <p><strong>Thanks for joining us, and happy sharing!</strong></p>
+
+    <p>— The Kora Team</p>
+  </body>
+</html>
+{{end}}

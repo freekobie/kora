@@ -6,9 +6,9 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/freekobie/kora/session"
 	"github.com/freekobie/kora/mail"
 	"github.com/freekobie/kora/model"
+	"github.com/freekobie/kora/session"
 	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -59,8 +59,8 @@ func (s *UserService) CreateUser(ctx context.Context, name, email, password stri
 
 	userAddr := mail.Address{Name: user.Name, Email: user.Email}
 	data := mail.Data{
-		Address: userAddr,
-		Code:    otpString,
+		"Address": userAddr,
+		"Code":    otpString,
 	}
 
 	token := model.UserToken{
@@ -72,7 +72,7 @@ func (s *UserService) CreateUser(ctx context.Context, name, email, password stri
 
 	_ = s.store.InsertToken(ctx, &token)
 
-	s.sendEmail([]mail.Address{userAddr}, "verify_email.html", data)
+	s.sendEmail([]mail.Address{userAddr}, "verify_email.gotmpl", data)
 
 	return user, nil
 }
@@ -99,7 +99,7 @@ func (us *UserService) VerifyUser(ctx context.Context, code string, email string
 	_ = us.store.DeleteToken(ctx, hash, VERIFICATION)
 
 	address := mail.Address{Name: user.Name, Email: user.Email}
-	us.sendEmail([]mail.Address{address}, "welcome_email.html", mail.Data{Address: address})
+	us.sendEmail([]mail.Address{address}, "welcome_email.gotmpl", mail.Data{"Address": address})
 
 	return user, nil
 }
@@ -119,8 +119,8 @@ func (us *UserService) ResendVerificationEmail(ctx context.Context, email string
 
 	userAddr := mail.Address{Email: email, Name: user.Name}
 	data := mail.Data{
-		Address: userAddr,
-		Code:    otpString,
+		"Address": userAddr,
+		"Code":    otpString,
 	}
 
 	token := model.UserToken{
@@ -135,7 +135,7 @@ func (us *UserService) ResendVerificationEmail(ctx context.Context, email string
 		return err
 	}
 
-	us.sendEmail([]mail.Address{userAddr}, "verify_email.html", data)
+	us.sendEmail([]mail.Address{userAddr}, "verify_email.gotmpl", data)
 
 	return nil
 }
