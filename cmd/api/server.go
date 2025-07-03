@@ -6,14 +6,16 @@ import (
 	"net/http"
 
 	"github.com/freekobie/kora/handler"
+	"github.com/freekobie/kora/service"
 )
 
 type application struct {
 	handler *handler.Handler
 	server  *http.Server
+	fileService *service.FileService
 }
 
-func newApplication(handler *handler.Handler, address string) *application {
+func newApplication(handler *handler.Handler, address string, fileService *service.FileService) *application {
 	server := http.Server{
 		Addr: fmt.Sprintf(":%s", address),
 	}
@@ -21,6 +23,7 @@ func newApplication(handler *handler.Handler, address string) *application {
 	return &application{
 		handler: handler,
 		server:  &server,
+		fileService: fileService,
 	}
 }
 

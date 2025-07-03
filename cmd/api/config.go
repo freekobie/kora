@@ -10,6 +10,7 @@ type Config struct {
 	MailConfig  *mail.Config
 	PostgresURL string
 	ServerAddress string
+	GCSBucket string
 }
 
 func loadConfig() *Config {
@@ -25,5 +26,6 @@ func loadConfig() *Config {
 		MailConfig:  mailCfg,
 		PostgresURL: os.Getenv("DB_URL"),
 		ServerAddress: os.Getenv("PORT"),
+		GCSBucket: os.Getenv("GCS_BUCKET"),
 	}
 }

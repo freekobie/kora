@@ -1,6 +1,5 @@
 package main
 
-
 import (
 	"context"
 	"log/slog"
@@ -17,12 +16,12 @@ import (
 	"github.com/joho/godotenv"
 )
 
-//	@title			Backend for Kora file management
-//	@version		1.0
-//	@description	This is the backend API for the Kora file management application.
-//	@contact.name	API Support
-//	@contact.url	https://github.com/freekobie/kora
-//	@contact.email	support@kora.local
+// @title			Backend for Kora file management
+// @version		1.0
+// @description	This is the backend API for the Kora file management application.
+// @contact.name	API Support
+// @contact.url	https://github.com/freekobie/kora
+// @contact.email	support@kora.local
 func main() {
 
 	_ = godotenv.Load()
@@ -43,11 +42,21 @@ func main() {
 	}
 
 	mailer := mail.NewMailer(cfg.MailConfig)
-	userService := service.NewUserService(postgres.NewUserStore(db), mailer)
 
-	handler := handler.NewHandler(userService)
+	userStore := postgres.NewUserStore(db)
+	fileStore := postgres.NewFileStore(db)
 
-	app := newApplication(handler, cfg.ServerAddress)
+	gcsService, err := service.NewGCS(context.Background(), cfg.GCSBucket)
+	if err != nil {
+		panic(err)
+	}
+
+	userService := service.NewUserService(userStore, mailer)
+	fileService := service.NewFileService(fileStore, gcsService)
+
+	handler := handler.NewHandler(userService, fileService)
+
+	app := newApplication(handler, cfg.ServerAddress, fileService)
 
 	// Graceful shutdown setup
 	stop := make(chan os.Signal, 1)
