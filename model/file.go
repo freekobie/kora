@@ -28,10 +28,8 @@ type File struct {
 	LastModified time.Time `json:"lastModified"`
 }
 
-
 // FileStorage is an interface for storing and retrieving file metadata.
 type FileStorage interface {
 	CreateFolder(ctx context.Context, folder *Folder) error
 	CreateFile(ctx context.Context, file *File) error
 }
-
