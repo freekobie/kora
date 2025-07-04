@@ -1,4 +1,3 @@
-
 package service
 
 import (
@@ -18,15 +17,17 @@ type GCS struct {
 
 // NewGCS creates a new GCS service.
 func NewGCS(ctx context.Context, bucket string) (*GCS, error) {
-	client, err := storage.NewClient(ctx)
-	if err != nil {
-		return nil, fmt.Errorf("failed to create gcs client: %w", err)
-	}
+	// client, err := storage.NewClient(ctx)
+	// if err != nil {
+	// 	return nil, fmt.Errorf("failed to create gcs client: %w", err)
+	// }
 
-	return &GCS{
-		client: client,
-		bucket: bucket,
-	}, nil
+	// return &GCS{
+	// 	client: client,
+	// 	bucket: bucket,
+	// }, nil
+
+	return &GCS{}, nil
 }
 
 // UploadFile uploads a file to Google Cloud Storage.

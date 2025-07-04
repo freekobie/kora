@@ -1,4 +1,32 @@
 definitions:
+  handler.AccessResponse:
+    properties:
+      access:
+        $ref: '#/definitions/session.UserAccess'
+      status:
+        type: integer
+    type: object
+  handler.Response:
+    properties:
+      message:
+        type: string
+      status:
+        type: integer
+    type: object
+  handler.SessionResponse:
+    properties:
+      session:
+        $ref: '#/definitions/session.UserSession'
+      status:
+        type: integer
+    type: object
+  handler.UserResponse:
+    properties:
+      status:
+        type: integer
+      user:
+        $ref: '#/definitions/model.User'
+    type: object
   model.User:
     properties:
       createdAt:
@@ -17,6 +45,22 @@ definitions:
         type: string
       verified:
         type: boolean
+    type: object
+  session.UserAccess:
+    properties:
+      accessToken:
+        type: string
+      expiresAt:
+        type: string
+    type: object
+  session.UserSession:
+    properties:
+      expiresAt:
+        type: string
+      refreshToken:
+        type: string
+      user:
+        $ref: '#/definitions/model.User'
     type: object
 info:
   contact:
@@ -45,26 +89,19 @@ paths:
         "200":
           description: OK
           schema:
-            additionalProperties: true
-            type: object
+            $ref: '#/definitions/handler.AccessResponse'
         "400":
           description: Bad Request
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
         "401":
           description: Unauthorized
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
         "500":
           description: Internal Server Error
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
       summary: Refresh access token
       tags:
       - users
@@ -86,26 +123,19 @@ paths:
         "200":
           description: OK
           schema:
-            additionalProperties: true
-            type: object
+            $ref: '#/definitions/handler.SessionResponse'
         "400":
           description: Bad Request
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
         "401":
           description: Unauthorized
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
         "500":
           description: Internal Server Error
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
       summary: Login user
       tags:
       - users
@@ -127,26 +157,19 @@ paths:
         "201":
           description: Created
           schema:
-            additionalProperties: true
-            type: object
+            $ref: '#/definitions/handler.UserResponse'
         "400":
           description: Bad Request
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
         "409":
           description: Conflict
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
         "500":
           description: Internal Server Error
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
       summary: Register a new user
       tags:
       - users
@@ -168,20 +191,15 @@ paths:
         "200":
           description: OK
           schema:
-            additionalProperties: true
-            type: object
+            $ref: '#/definitions/handler.UserResponse'
         "400":
           description: Bad Request
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
         "500":
           description: Internal Server Error
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
       summary: Verify user email
       tags:
       - users
@@ -203,33 +221,23 @@ paths:
         "202":
           description: Accepted
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
         "400":
           description: Bad Request
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
         "404":
           description: Not Found
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
         "422":
           description: Unprocessable Entity
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
         "500":
           description: Internal Server Error
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
       summary: Request verification email
       tags:
       - users
@@ -248,27 +256,19 @@ paths:
         "200":
           description: OK
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
         "400":
           description: Bad Request
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
         "404":
           description: Not Found
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
         "500":
           description: Internal Server Error
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
       security:
       - BearerAuth: []
       summary: Delete user
@@ -288,25 +288,19 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.User'
+            $ref: '#/definitions/handler.UserResponse'
         "400":
           description: Bad Request
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
         "404":
           description: Not Found
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
         "500":
           description: Internal Server Error
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
       security:
       - BearerAuth: []
       summary: Get user by ID
@@ -330,25 +324,19 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.User'
+            $ref: '#/definitions/handler.UserResponse'
         "400":
           description: Bad Request
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
         "422":
           description: Unprocessable Entity
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
         "500":
           description: Internal Server Error
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/handler.Response'
       security:
       - BearerAuth: []
       summary: Update user data
