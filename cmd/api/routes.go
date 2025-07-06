@@ -28,7 +28,7 @@ func (app *application) routes() *gin.Engine {
 	open.POST("/auth/login", app.handler.LoginUser)
 	open.POST("/auth/access", app.handler.GetUserAccessToken)
 	open.POST("/auth/verify", app.handler.VerifyUser)
-	open.POST("/auth/verify/request", app.handler.RequestVerification)
+	open.POST("/auth/verify/request", app.handler.RequestVerificationCode)
 
 	protected := open.Group("/")
 	protected.Use(middlewares.Authentication())

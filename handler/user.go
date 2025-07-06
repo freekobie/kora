@@ -90,7 +90,7 @@ func (h *Handler) VerifyUser(c *gin.Context) {
 	c.JSON(http.StatusOK, UserResponse{Status: http.StatusOK, User: *user})
 }
 
-// RequestVerification godoc
+// RequestVerificationCode godoc
 //
 //	@Summary		Request verification email
 //	@Description	Request a new verification code for a user
@@ -104,7 +104,7 @@ func (h *Handler) VerifyUser(c *gin.Context) {
 //	@Failure		422		{object}	Response
 //	@Failure		500		{object}	Response
 //	@Router			/auth/verify/request [post]
-func (h *Handler) RequestVerification(c *gin.Context) {
+func (h *Handler) RequestVerificationCode(c *gin.Context) {
 	var input struct {
 		Email string `json:"email" binding:"required,email"`
 	}
