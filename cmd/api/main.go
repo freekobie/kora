@@ -16,7 +16,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-// @title			Backend for Kora file management
+// @title		Backend for Kora file management
 // @version		1.0
 // @description	This is the backend API for the Kora file management application.
 // @contact.name	API Support

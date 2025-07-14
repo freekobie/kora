@@ -1,6 +1,5 @@
 package session
 
-
 import (
 	"errors"
 	"log/slog"
@@ -30,8 +29,8 @@ const (
 
 type UserSession struct {
 	User         model.User `json:"user"`
-	RefreshToken string      `json:"refreshToken"`
-	ExpiresAt    time.Time   `json:"expiresAt"`
+	RefreshToken string     `json:"refreshToken"`
+	ExpiresAt    time.Time  `json:"expiresAt"`
 }
 
 type UserAccess struct {
