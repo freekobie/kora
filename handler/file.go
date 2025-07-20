@@ -11,7 +11,6 @@ import (
 	"github.com/google/uuid"
 )
 
-// FileUploader is an interface for uploading files.
 type FileUploader interface {
 	UploadFile(ctx *gin.Context, user *model.User, folderID *uuid.UUID, file multipart.File, header *multipart.FileHeader) (*model.File, error)
 }

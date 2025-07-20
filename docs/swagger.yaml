@@ -2,7 +2,7 @@ definitions:
   handler.AccessResponse:
     properties:
       access:
-        $ref: '#/definitions/session.UserAccess'
+        $ref: "#/definitions/session.UserAccess"
       status:
         type: integer
     type: object
@@ -16,7 +16,7 @@ definitions:
   handler.SessionResponse:
     properties:
       session:
-        $ref: '#/definitions/session.UserSession'
+        $ref: "#/definitions/session.UserSession"
       status:
         type: integer
     type: object
@@ -25,7 +25,7 @@ definitions:
       status:
         type: integer
       user:
-        $ref: '#/definitions/model.User'
+        $ref: "#/definitions/model.User"
     type: object
   model.User:
     properties:
@@ -60,7 +60,7 @@ definitions:
       refreshToken:
         type: string
       user:
-        $ref: '#/definitions/model.User'
+        $ref: "#/definitions/model.User"
     type: object
 info:
   contact:
@@ -74,272 +74,272 @@ paths:
   /auth/access:
     post:
       consumes:
-      - application/json
+        - application/json
       description: Get a new access token using a refresh token
       parameters:
-      - description: Refresh token
-        in: body
-        name: refreshToken
-        required: true
-        schema:
-          type: object
+        - description: Refresh token
+          in: body
+          name: refreshToken
+          required: true
+          schema:
+            type: object
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/handler.AccessResponse'
+            $ref: "#/definitions/handler.AccessResponse"
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
       summary: Refresh access token
       tags:
-      - users
+        - users
   /auth/login:
     post:
       consumes:
-      - application/json
+        - application/json
       description: Authenticate user and return session tokens
       parameters:
-      - description: User credentials
-        in: body
-        name: credentials
-        required: true
-        schema:
-          type: object
+        - description: User credentials
+          in: body
+          name: credentials
+          required: true
+          schema:
+            type: object
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/handler.SessionResponse'
+            $ref: "#/definitions/handler.SessionResponse"
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
       summary: Login user
       tags:
-      - users
+        - users
   /auth/register:
     post:
       consumes:
-      - application/json
+        - application/json
       description: Create a new user account
       parameters:
-      - description: User registration info
-        in: body
-        name: user
-        required: true
-        schema:
-          type: object
+        - description: User registration info
+          in: body
+          name: user
+          required: true
+          schema:
+            type: object
       produces:
-      - application/json
+        - application/json
       responses:
         "201":
           description: Created
           schema:
-            $ref: '#/definitions/handler.UserResponse'
+            $ref: "#/definitions/handler.UserResponse"
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
         "409":
           description: Conflict
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
       summary: Register a new user
       tags:
-      - users
+        - users
   /auth/verify:
     post:
       consumes:
-      - application/json
+        - application/json
       description: Verify a user's email with a code
       parameters:
-      - description: Verification info
-        in: body
-        name: verification
-        required: true
-        schema:
-          type: object
+        - description: Verification info
+          in: body
+          name: verification
+          required: true
+          schema:
+            type: object
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/handler.UserResponse'
+            $ref: "#/definitions/handler.UserResponse"
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
       summary: Verify user email
       tags:
-      - users
+        - users
   /auth/verify/request:
     post:
       consumes:
-      - application/json
+        - application/json
       description: Request a new verification code for a user
       parameters:
-      - description: User email
-        in: body
-        name: email
-        required: true
-        schema:
-          type: object
+        - description: User email
+          in: body
+          name: email
+          required: true
+          schema:
+            type: object
       produces:
-      - application/json
+        - application/json
       responses:
         "202":
           description: Accepted
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
         "422":
           description: Unprocessable Entity
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
       summary: Request verification email
       tags:
-      - users
+        - users
   /users/{id}:
     delete:
       description: Delete a user by ID
       parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: string
+        - description: User ID
+          in: path
+          name: id
+          required: true
+          type: string
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
       security:
-      - BearerAuth: []
+        - BearerAuth: []
       summary: Delete user
       tags:
-      - users
+        - users
     get:
       description: Get user details by user ID
       parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: string
+        - description: User ID
+          in: path
+          name: id
+          required: true
+          type: string
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/handler.UserResponse'
+            $ref: "#/definitions/handler.UserResponse"
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
       security:
-      - BearerAuth: []
+        - BearerAuth: []
       summary: Get user by ID
       tags:
-      - users
+        - users
   /users/profile:
     patch:
       consumes:
-      - application/json
+        - application/json
       description: Update user profile information
       parameters:
-      - description: User update info
-        in: body
-        name: user
-        required: true
-        schema:
-          type: object
+        - description: User update info
+          in: body
+          name: user
+          required: true
+          schema:
+            type: object
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/handler.UserResponse'
+            $ref: "#/definitions/handler.UserResponse"
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
         "422":
           description: Unprocessable Entity
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.Response'
+            $ref: "#/definitions/handler.Response"
       security:
-      - BearerAuth: []
+        - BearerAuth: []
       summary: Update user data
       tags:
-      - users
+        - users
 swagger: "2.0"

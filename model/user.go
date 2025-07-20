@@ -36,3 +36,13 @@ type UserStore interface {
 	GetUserForToken(ctx context.Context, tokenHash, scope, email string) (*User, error)
 	DeleteToken(ctx context.Context, tokenHash, scope string) error
 }
+
+type UserDetails struct {
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
+type UserService interface {
+	InsertUser(ctx context.Context, info UserDetails) (User, error)
+}

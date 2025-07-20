@@ -67,8 +67,8 @@ func (u *UserStore) DeleteUser(ctx context.Context, id uuid.UUID) error {
 // GetUser implements model.UserStore.
 func (u *UserStore) GetUser(ctx context.Context, id uuid.UUID) (model.User, error) {
 	query := `
-		SELECT id, name, email, password_hash, profile_photo, created_at, last_modified, verified 
-		FROM users 
+		SELECT id, name, email, password_hash, profile_photo, created_at, last_modified, verified
+		FROM users
 		WHERE id = $1;`
 
 	var user model.User
@@ -93,8 +93,8 @@ func (u *UserStore) GetUser(ctx context.Context, id uuid.UUID) (model.User, erro
 // GetUserByMail implements model.UserStore.
 func (u *UserStore) GetUserByMail(ctx context.Context, email string) (model.User, error) {
 	query := `
-		SELECT id, name, email, password_hash, profile_photo, created_at, last_modified, verified 
-		FROM users 
+		SELECT id, name, email, password_hash, profile_photo, created_at, last_modified, verified
+		FROM users
 		WHERE email = $1;`
 
 	var user model.User
@@ -119,7 +119,7 @@ func (u *UserStore) GetUserByMail(ctx context.Context, email string) (model.User
 // UpdateUser implements model.UserStore.
 func (u *UserStore) UpdateUser(ctx context.Context, user *model.User) error {
 	query := `
-		UPDATE users 
+		UPDATE users
 		SET name = $1, email = $2, password_hash = $3, profile_photo = $4, last_modified = $5, verified = $6
 		WHERE id = $7;`
 
